@@ -1,0 +1,30 @@
+﻿{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:7891",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "AUTHORITY": "http://localhost:8080/realms/microservice-app",
+        "SWAGGER_AUTHORIZATION_URL": "http://localhost:8080/realms/microservice-app/protocol/openid-connect/auth",
+        "SWAGGER_TOKEN_URL": "http://localhost:8080/realms/microservice-app/protocol/openid-connect/token",
+        "CONNECTIONSTRING": "Server=localhost;Port=5432;Database=productservice;User id=postgres;Password=password;",
+        "API_ALLOWED_ORIGINS": "http://localhost:4200",
+        "CLIENT_ID": "gateway",
+        "REQUIREHTTPS": "false"
+      }
+    },
+    "https": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "https://localhost:7050;http://localhost:5151",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

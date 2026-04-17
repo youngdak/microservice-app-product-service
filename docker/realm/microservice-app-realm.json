@@ -1,0 +1,42 @@
+{
+  "realm": "microservice-app",
+  "enabled": true,
+
+  "clients": [
+    {
+      "clientId": "angular-product-service",
+      "enabled": true,
+      "publicClient": true,
+      "redirectUris": [
+        "http://localhost:4200/*"
+      ],
+      "webOrigins": [
+        "http://localhost:4200"
+      ]
+    },
+    {
+      "clientId": "gateway",
+      "enabled": true,
+      "publicClient": false,
+      "redirectUris": [
+      ],
+      "webOrigins": [
+      ]
+    }
+  ],
+
+  "users": [
+    {
+      "username": "testuser",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password",
+          "temporary": false
+        }
+      ]
+    }
+  ]
+}

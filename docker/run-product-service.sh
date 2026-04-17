@@ -1,0 +1,1 @@
+dotnet run --project ../backend/src/Services/ProductService/ProductService.Api
