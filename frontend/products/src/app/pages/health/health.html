@@ -1,0 +1,19 @@
+<div class="h-[50vh] flex flex-col justify-center items-center text-center bg-gray-50 dark:bg-slate-900 md:mt-0">
+  <h1 class="text-3xl md:text-[4rem] font-bold text-slate-950 dark:text-white font-['Poppins']">
+    Health Check
+  </h1>
+
+  @if(healthCheck$ | async; as check){
+  <div class="flex flex-col gap-4 justify-center mt-10 text-2xl font-bold text-slate-950 dark:text-white mx-auto px-4">
+    <div class="flex flex-row justify-between gap-5">
+      <span>Status:</span>
+      <span>{{ check.status}}</span>
+    </div>
+    <div class="flex flex-row justify-between gap-5">
+      <span>Total Duration:</span>
+      <span>{{ check.totalDuration }}</span>
+    </div>
+  </div>
+  }
+
+</div>

@@ -1,0 +1,100 @@
+<div class="min-h-[50vh]">
+  <div class="flex flex-col justify-center items-center text-center bg-gray-50 dark:bg-slate-900 md:mt-0">
+    <h1 class="text-3xl md:text-[4rem] font-bold text-slate-950 dark:text-white font-['Poppins']">
+      Products
+    </h1>
+  </div>
+  <div class="flex flex-col mt-6 text-2xl font-bold text-slate-950 dark:text-white mx-50">
+    <button (click)="openModal()" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 w-70">New
+      Product</button>
+    <div class="my-5">
+      <input [(ngModel)]="searchInput" (keydown.enter)="search()" type="text" placeholder="search by color"
+        class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800" />
+    </div>
+
+    @if(products$ | async; as productResult){
+    <div class="overflow-x-auto">
+      <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="text-left px-6 py-3 text-sm font-semibold text-gray-600">Name</th>
+            <th class="text-left px-6 py-3 text-sm font-semibold text-gray-600">Color</th>
+            <th class="text-left px-6 py-3 text-sm font-semibold text-gray-600">Sku</th>
+            <th class="text-left px-6 py-3 text-sm font-semibold text-gray-600">Price</th>
+            <th class="text-left px-6 py-3 text-sm font-semibold text-gray-600">Description</th>
+          </tr>
+        </thead>
+
+        <tbody class="divide-y divide-gray-200">
+          @for (product of productResult.data; track product.id) {
+          <tr class="">
+            <td class="px-6 py-4 text-sm dark:text-gray-300">{{ product.name }}</td>
+            <td class="px-6 py-4 text-sm dark:text-gray-300">{{ product.color }}</td>
+            <td class="px-6 py-4 text-sm dark:text-gray-300"> {{ product.sku }}</td>
+            <td class="px-6 py-4 text-sm dark:text-gray-300"> {{ product.price }}</td>
+            <td class="px-6 py-4 text-sm dark:text-gray-300"> {{ product.description }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    }@else {
+    <p>No products</p>
+    }
+  </div>
+</div>
+
+@if(isOpen){
+<div class="fixed inset-0 bg-gray-900 opacity-95 flex items-center justify-center">
+  <div class="bg-white p-6 rounded-lg w-1/2">
+    <h2 class="text-lg font-bold mb-4">Add Product</h2>
+
+    @if(error()){
+    <p class="mb-4 text-red-600">{{error()}}</p>
+    }
+    <div class="space-y-4">
+      <div>
+        <label for="name" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+          Name
+        </label>
+        <input [(ngModel)]="productModel.name" type="text" id="name" placeholder="name"
+          class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800" />
+      </div>
+      <div>
+        <label for="color" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+          Color
+        </label>
+        <input [(ngModel)]="productModel.color" type="text" id="color" placeholder="color"
+          class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800" />
+      </div>
+      <div>
+        <label for="color" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+          Sku
+        </label>
+        <input [(ngModel)]="productModel.sku" type="text" id="sku" placeholder="sku"
+          class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800" />
+      </div>
+      <div>
+        <label for="color" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+          Price
+        </label>
+        <input [(ngModel)]="productModel.price" type="number" id="price" placeholder="price"
+          class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800" />
+      </div>
+      <div>
+        <label for="color" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+          Description
+        </label>
+        <textarea rows="10" cols="10" [(ngModel)]="productModel.description" id="description" placeholder="description"
+          class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+        </textarea>
+      </div>
+    </div>
+
+    <div class="mt-4 flex justify-end gap-2">
+      <button (click)="closeModal()">Cancel</button>
+      <button (click)="confirm()">OK</button>
+    </div>
+  </div>
+</div>
+}

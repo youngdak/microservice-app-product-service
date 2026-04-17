@@ -1,0 +1,37 @@
+<header class="w-full bg-gray-50 text-slate-950 dark:bg-slate-900 dark:text-[#FFFEFE] transition-all duration-300 py-4"
+  [class.fixed]="fixed" [class.top-0]="fixed" [class.bg-white]="fixed" [class.shadow]="fixed">
+  <nav class="max-w-6xl mx-auto px-6 flex items-center justify-between">
+    <a routerLink="/">Home</a>
+
+    <!-- DESKTOP MENU -->
+    <div class="hidden md:flex space-x-8">
+      <a class="nav-link" routerLink="/health">Health</a>
+      <a class="nav-link" routerLink="/products">Products</a>
+      @if(keycloakService.isLoggedIn()){
+      <a class="nav-link hover:cursor-pointer" (click)="logout()">Logout</a>
+      }
+    </div>
+
+    <!-- MOBILE BUTTON -->
+    <button class="md:hidden focus:outline-none" (click)="toggleMenu()" aria-label="Toggle menu">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="menuOpen
+            ? 'M6 18L18 6M6 6l12 12'
+            : 'M4 6h16M4 12h16M4 18h16'" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="md:hidden overflow-hidden transition-all duration-300" [class.max-h-0]="!menuOpen"
+    [class.max-h-96]="menuOpen">
+    <div class="flex flex-col px-6 pt-4 pb-6 space-y-4 bg-gray-50 dark:bg-slate-900">
+      <a class="nav-link" routerLink="/health" (click)="closeMenu()">Health</a>
+      <a class="nav-link" routerLink="/products" (click)="closeMenu()">Products</a>
+
+      @if(keycloakService.isLoggedIn()){
+      <a class="nav-link hover:cursor-pointer" (click)="logout()">Logout</a>
+      }
+    </div>
+  </div>
+</header>
